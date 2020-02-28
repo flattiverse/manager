@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B12F7F0A-0C43-400C-B627-CD2B056D2D57}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Manager</RootNamespace>
+    <AssemblyName>Manager</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FlattiverseConnector">
+      <HintPath>..\..\..\..\connector\trunk\Connector\Connector\bin\Release\netstandard2.0\FlattiverseConnector.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UIs\Accounts\ChangePasswordForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIs\Accounts\ChangePasswordForm.Designer.cs">
+      <DependentUpon>ChangePasswordForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIs\Space\UnitPanels\mMeteoroidPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIs\Space\UnitPanels\mMeteoroidPanel.Designer.cs">
+      <DependentUpon>mMeteoroidPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIs\Space\UnitPanels\mTargetPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIs\Space\UnitPanels\mTargetPanel.Designer.cs">
+      <DependentUpon>mTargetPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIs\Space\UnitPanels\mMoonPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIs\Space\UnitPanels\mMoonPanel.Designer.cs">
+      <DependentUpon>mMoonPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIs\Space\UnitPanels\mPlanetPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIs\Space\UnitPanels\mPlanetPanel.Designer.cs">
+      <DependentUpon>mPlanetPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIs\Space\UnitPanels\mSunPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIs\Space\UnitPanels\mSunPanel.Designer.cs">
+      <DependentUpon>mSunPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIs\Space\SpacePanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIs\Space\SpacePanel.Designer.cs">
+      <DependentUpon>SpacePanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIs\Settings\UniverseSettingsPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIs\Settings\UniverseSettingsPanel.Designer.cs">
+      <DependentUpon>UniverseSettingsPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIs\LogInForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIs\LogInForm.Designer.cs">
+      <DependentUpon>LogInForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIs\MainUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIs\MainUI.Designer.cs">
+      <DependentUpon>MainUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UIs\Accounts\AccountsPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIs\Accounts\AccountsPanel.Designer.cs">
+      <DependentUpon>AccountsPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIs\Space\UnitEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIs\Space\UnitEditor.Designer.cs">
+      <DependentUpon>UnitEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Units\mMeteoroid.cs" />
+    <Compile Include="Units\mMoon.cs" />
+    <Compile Include="Units\mPlanet.cs" />
+    <Compile Include="Units\mBuoy.cs" />
+    <Compile Include="Units\mTarget.cs" />
+    <Compile Include="Units\mSun.cs" />
+    <Compile Include="Units\mUnit.cs" />
+    <EmbeddedResource Include="UIs\Accounts\ChangePasswordForm.resx">
+      <DependentUpon>ChangePasswordForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIs\Space\UnitPanels\mMeteoroidPanel.resx">
+      <DependentUpon>mMeteoroidPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIs\Space\UnitPanels\mTargetPanel.resx">
+      <DependentUpon>mTargetPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIs\Space\UnitPanels\mMoonPanel.resx">
+      <DependentUpon>mMoonPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIs\Space\UnitPanels\mPlanetPanel.resx">
+      <DependentUpon>mPlanetPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIs\Space\UnitPanels\mSunPanel.resx">
+      <DependentUpon>mSunPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIs\Space\SpacePanel.resx">
+      <DependentUpon>SpacePanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIs\Settings\UniverseSettingsPanel.resx">
+      <DependentUpon>UniverseSettingsPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIs\LogInForm.resx">
+      <DependentUpon>LogInForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIs\MainUI.resx">
+      <DependentUpon>MainUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="UIs\Accounts\AccountsPanel.resx">
+      <DependentUpon>AccountsPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIs\Space\UnitEditor.resx">
+      <DependentUpon>UnitEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
