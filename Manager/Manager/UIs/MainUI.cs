@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
-using Flattiverse;
+﻿using Flattiverse;
 using Manager.UIs.Accounts;
-using Manager.UIs.Space;
 using Manager.UIs.Settings;
+using Manager.UIs.Space;
+using System;
+using System.Windows.Forms;
 
 namespace Manager.UIs
 {
@@ -53,7 +52,7 @@ namespace Manager.UIs
 
             SpacePanel ds = new SpacePanel(galaxy);
             ds.Dock = DockStyle.Fill;
-            ds.Tag = galaxy.Universe;
+            ds.Tag = galaxy;
             mainPanel.Controls.Add(ds);
         }
         #endregion
@@ -135,10 +134,19 @@ namespace Manager.UIs
             mainPanel.Controls.Add(sa);
         }
 
-        private void mainPanel_ControlRemoved(object sender, ControlEventArgs e)
+        private async void mainPanel_ControlRemoved(object sender, ControlEventArgs e)
         {
-            if (e.Control.Tag is Universe)
-                ((Universe)(e.Control.Tag)).Part();
+            if (e.Control.Tag is Galaxy)
+                try
+                {
+                    Galaxy galaxy = (Galaxy)(e.Control.Tag);
+
+                    await galaxy.Universe.Part();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error while parting from " + ((Galaxy)(e.Control.Tag)).Name, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
         }
         #endregion
     }

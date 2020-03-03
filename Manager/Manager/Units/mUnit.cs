@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using Flattiverse;
+using Flattiverse.Units;
 
 namespace Manager.Units
 {
@@ -19,7 +20,10 @@ namespace Manager.Units
         #endregion
 
         #region Constructors
-        public mUnit() { }
+        public mUnit(Galaxy galaxy)
+        {
+            Galaxy = galaxy;
+        }
 
         public mUnit(Unit unit)
         {

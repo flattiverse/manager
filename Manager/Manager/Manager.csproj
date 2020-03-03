@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ComboBoxItem.cs" />
     <Compile Include="UIs\Accounts\ChangePasswordForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -60,6 +61,12 @@
     </Compile>
     <Compile Include="UIs\Space\UnitPanels\mMeteoroidPanel.Designer.cs">
       <DependentUpon>mMeteoroidPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIs\Space\UnitPanels\mBuoyPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIs\Space\UnitPanels\mBuoyPanel.Designer.cs">
+      <DependentUpon>mBuoyPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="UIs\Space\UnitPanels\mTargetPanel.cs">
       <SubType>UserControl</SubType>
@@ -123,10 +130,12 @@
     <Compile Include="UIs\Space\UnitEditor.Designer.cs">
       <DependentUpon>UnitEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Units\mCorona.cs" />
     <Compile Include="Units\mMeteoroid.cs" />
     <Compile Include="Units\mMoon.cs" />
     <Compile Include="Units\mPlanet.cs" />
     <Compile Include="Units\mBuoy.cs" />
+    <Compile Include="Units\mPlayerUnit.cs" />
     <Compile Include="Units\mTarget.cs" />
     <Compile Include="Units\mSun.cs" />
     <Compile Include="Units\mUnit.cs" />
@@ -135,6 +144,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UIs\Space\UnitPanels\mMeteoroidPanel.resx">
       <DependentUpon>mMeteoroidPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIs\Space\UnitPanels\mBuoyPanel.resx">
+      <DependentUpon>mBuoyPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIs\Space\UnitPanels\mTargetPanel.resx">
       <DependentUpon>mTargetPanel.cs</DependentUpon>

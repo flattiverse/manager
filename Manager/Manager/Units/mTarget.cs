@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Xml;
 using Flattiverse;
+using Flattiverse.Units;
 
 namespace Manager.Units
 {
@@ -13,7 +14,10 @@ namespace Manager.Units
         #endregion
 
         #region Constructors
-        public mTarget() { }
+        public mTarget(Galaxy galaxy) : base(galaxy)
+        {
+            Team = galaxy.Universe.Teams.List[0];
+        }
 
         public mTarget(Target target) : base(target)
         {
@@ -30,9 +34,12 @@ namespace Manager.Units
 
             setBaseAttributes(el);
 
-            el.SetAttribute("Team", Team.ToString());
+            el.SetAttribute("Team", Team.ID.ToString());
             el.SetAttribute("Sequence", Sequence.ToString());
-            el.SetAttribute("Hint", Hint.ToString());
+
+            if (Hint.HasValue)
+                el.SetAttribute("Hint", Hint.ToString());
+
             return el;
         }
         #endregion

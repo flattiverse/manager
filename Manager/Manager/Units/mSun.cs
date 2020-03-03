@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Flattiverse;
+using Flattiverse.Units;
 using System.Xml;
-using Flattiverse;
 
 namespace Manager.Units
 {
@@ -10,20 +10,23 @@ namespace Manager.Units
         public float Gravity;
         public float Radiation;
         public float PowerOutput;
-        public float PlasmaLevel;
-        public float Amount;
+        public mCorona mCorona;
         #endregion
 
         #region Constructors
-        public mSun() { }
+        public mSun(Galaxy galaxy) : base(galaxy)
+        {
+            mCorona = new mCorona();
+        }
 
         public mSun(Sun sun) : base(sun)
         {
             Gravity = sun.Gravity;
             Radiation = sun.Radiation;
             PowerOutput = sun.PowerOutput;
-            //PlasmaLevel = sun.PlasmaLevel; //TODO: comment out when ready
-            //Amount = sun.Amount;
+
+            if (sun.Corona != null)
+                mCorona = new mCorona(sun.Corona);
         }
         #endregion
 
@@ -37,8 +40,9 @@ namespace Manager.Units
             el.SetAttribute("Gravity", Gravity.ToString());
             el.SetAttribute("Radiation", Radiation.ToString());
             el.SetAttribute("PowerOutput", PowerOutput.ToString());
-            //el.SetAttribute("Plasma Level", PlasmaLevel.ToString()); //TODO: comment out when ready
-            //el.SetAttribute("Amount", Amount.ToString());
+
+            if (mCorona != null && mCorona.Plasma > 0)
+                mCorona.AddXmlAttributes(xmlDoc, el);
 
             return el;
         }

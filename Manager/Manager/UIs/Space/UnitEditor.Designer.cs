@@ -51,7 +51,7 @@
             // 
             // positionXNumericUpDown
             // 
-            this.positionXNumericUpDown.DecimalPlaces = 2;
+            this.positionXNumericUpDown.DecimalPlaces = 1;
             this.positionXNumericUpDown.Increment = new decimal(new int[] {
             10,
             0,
@@ -69,7 +69,7 @@
             0,
             -2147483648});
             this.positionXNumericUpDown.Name = "positionXNumericUpDown";
-            this.positionXNumericUpDown.Size = new System.Drawing.Size(52, 20);
+            this.positionXNumericUpDown.Size = new System.Drawing.Size(68, 20);
             this.positionXNumericUpDown.TabIndex = 2;
             this.positionXNumericUpDown.ValueChanged += new System.EventHandler(this.positionXNumericUpDown_ValueChanged);
             // 
@@ -85,7 +85,7 @@
             // yLabel
             // 
             this.yLabel.AutoSize = true;
-            this.yLabel.Location = new System.Drawing.Point(152, 25);
+            this.yLabel.Location = new System.Drawing.Point(143, 25);
             this.yLabel.Name = "yLabel";
             this.yLabel.Size = new System.Drawing.Size(57, 13);
             this.yLabel.TabIndex = 4;
@@ -93,13 +93,13 @@
             // 
             // positionYNumericUpDown
             // 
-            this.positionYNumericUpDown.DecimalPlaces = 2;
+            this.positionYNumericUpDown.DecimalPlaces = 1;
             this.positionYNumericUpDown.Increment = new decimal(new int[] {
             10,
             0,
             0,
             0});
-            this.positionYNumericUpDown.Location = new System.Drawing.Point(213, 23);
+            this.positionYNumericUpDown.Location = new System.Drawing.Point(203, 23);
             this.positionYNumericUpDown.Maximum = new decimal(new int[] {
             1000000,
             0,
@@ -111,14 +111,14 @@
             0,
             -2147483648});
             this.positionYNumericUpDown.Name = "positionYNumericUpDown";
-            this.positionYNumericUpDown.Size = new System.Drawing.Size(52, 20);
+            this.positionYNumericUpDown.Size = new System.Drawing.Size(68, 20);
             this.positionYNumericUpDown.TabIndex = 5;
             this.positionYNumericUpDown.ValueChanged += new System.EventHandler(this.positionYNumericUpDown_ValueChanged);
             // 
             // rLabel
             // 
             this.rLabel.AutoSize = true;
-            this.rLabel.Location = new System.Drawing.Point(285, 25);
+            this.rLabel.Location = new System.Drawing.Point(280, 25);
             this.rLabel.Name = "rLabel";
             this.rLabel.Size = new System.Drawing.Size(43, 13);
             this.rLabel.TabIndex = 6;
@@ -126,20 +126,20 @@
             // 
             // radiusNumericUpDown
             // 
-            this.radiusNumericUpDown.DecimalPlaces = 2;
+            this.radiusNumericUpDown.DecimalPlaces = 1;
             this.radiusNumericUpDown.Increment = new decimal(new int[] {
             10,
             0,
             0,
             0});
-            this.radiusNumericUpDown.Location = new System.Drawing.Point(334, 23);
+            this.radiusNumericUpDown.Location = new System.Drawing.Point(325, 23);
             this.radiusNumericUpDown.Maximum = new decimal(new int[] {
             100000,
             0,
             0,
             0});
             this.radiusNumericUpDown.Name = "radiusNumericUpDown";
-            this.radiusNumericUpDown.Size = new System.Drawing.Size(52, 20);
+            this.radiusNumericUpDown.Size = new System.Drawing.Size(68, 20);
             this.radiusNumericUpDown.TabIndex = 7;
             this.radiusNumericUpDown.Value = new decimal(new int[] {
             100,
@@ -158,7 +158,7 @@
             this.dimensionGroupBox.Controls.Add(this.positionYNumericUpDown);
             this.dimensionGroupBox.Location = new System.Drawing.Point(7, 83);
             this.dimensionGroupBox.Name = "dimensionGroupBox";
-            this.dimensionGroupBox.Size = new System.Drawing.Size(399, 50);
+            this.dimensionGroupBox.Size = new System.Drawing.Size(400, 50);
             this.dimensionGroupBox.TabIndex = 8;
             this.dimensionGroupBox.TabStop = false;
             this.dimensionGroupBox.Text = "Dimensions";
@@ -169,7 +169,7 @@
             this.profileGroupBox.Controls.Add(this.nameLabel);
             this.profileGroupBox.Location = new System.Drawing.Point(7, 26);
             this.profileGroupBox.Name = "profileGroupBox";
-            this.profileGroupBox.Size = new System.Drawing.Size(399, 52);
+            this.profileGroupBox.Size = new System.Drawing.Size(400, 52);
             this.profileGroupBox.TabIndex = 9;
             this.profileGroupBox.TabStop = false;
             this.profileGroupBox.Text = "Profile";
@@ -195,9 +195,9 @@
             // 
             this.extraFieldsFlowLayoutPanel.AutoSize = true;
             this.extraFieldsFlowLayoutPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.extraFieldsFlowLayoutPanel.Location = new System.Drawing.Point(8, 142);
+            this.extraFieldsFlowLayoutPanel.Location = new System.Drawing.Point(4, 142);
             this.extraFieldsFlowLayoutPanel.Name = "extraFieldsFlowLayoutPanel";
-            this.extraFieldsFlowLayoutPanel.Size = new System.Drawing.Size(400, 10);
+            this.extraFieldsFlowLayoutPanel.Size = new System.Drawing.Size(402, 10);
             this.extraFieldsFlowLayoutPanel.TabIndex = 11;
             // 
             // menuStrip
@@ -206,7 +206,7 @@
             this.saveToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(414, 24);
+            this.menuStrip.Size = new System.Drawing.Size(409, 24);
             this.menuStrip.TabIndex = 12;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -222,7 +222,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(414, 160);
+            this.ClientSize = new System.Drawing.Size(409, 155);
             this.Controls.Add(this.extraFieldsFlowLayoutPanel);
             this.Controls.Add(this.profileGroupBox);
             this.Controls.Add(this.dimensionGroupBox);

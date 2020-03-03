@@ -24,19 +24,22 @@ namespace Manager.UIs.Space.UnitPanels
 
             this.mMeteoroid = mMeteoroid;
 
+            gravityNumericUpDown.Minimum = decimal.MinValue;
+            gravityNumericUpDown.Maximum = decimal.MaxValue;
             gravityNumericUpDown.Value = (decimal)mMeteoroid.Gravity;
+
+            radiationNumericUpDown.Minimum = decimal.MinValue;
+            radiationNumericUpDown.Maximum = decimal.MaxValue;
             radiationNumericUpDown.Value = (decimal)mMeteoroid.Radiation;
         }
         #endregion
 
-        private void gravityNumericUpDown_ValueChanged(object sender, EventArgs e)
-        {
-            mMeteoroid.Gravity = (float)gravityNumericUpDown.Value;
-        }
-
-        private void radiationNumericUpDown_ValueChanged(object sender, EventArgs e)
+        #region GUI Methods
+        private void mMeteoroidPanel_MouseLeave(object sender, EventArgs e)
         {
             mMeteoroid.Radiation = (float)radiationNumericUpDown.Value;
+            mMeteoroid.Gravity = (float)gravityNumericUpDown.Value;
         }
+        #endregion
     }
 }

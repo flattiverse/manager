@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.groupBox = new System.Windows.Forms.GroupBox();
+            this.hintvalueLabel = new System.Windows.Forms.Label();
+            this.hintCheckBox = new System.Windows.Forms.CheckBox();
             this.teamLabel = new System.Windows.Forms.Label();
             this.teamComboBox = new System.Windows.Forms.ComboBox();
             this.hintNumericUpDown = new System.Windows.Forms.NumericUpDown();
@@ -42,19 +44,39 @@
             // 
             // groupBox
             // 
+            this.groupBox.Controls.Add(this.hintvalueLabel);
+            this.groupBox.Controls.Add(this.hintCheckBox);
             this.groupBox.Controls.Add(this.teamLabel);
             this.groupBox.Controls.Add(this.teamComboBox);
             this.groupBox.Controls.Add(this.hintNumericUpDown);
             this.groupBox.Controls.Add(this.hintLabel);
             this.groupBox.Controls.Add(this.sequenceLabel);
             this.groupBox.Controls.Add(this.sequenceNumericUpDown);
-            this.groupBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox.Location = new System.Drawing.Point(0, 0);
             this.groupBox.Name = "groupBox";
-            this.groupBox.Size = new System.Drawing.Size(400, 64);
+            this.groupBox.Size = new System.Drawing.Size(400, 95);
             this.groupBox.TabIndex = 0;
             this.groupBox.TabStop = false;
             this.groupBox.Text = "Extra Fields";
+            // 
+            // hintvalueLabel
+            // 
+            this.hintvalueLabel.AutoSize = true;
+            this.hintvalueLabel.Location = new System.Drawing.Point(68, 68);
+            this.hintvalueLabel.Name = "hintvalueLabel";
+            this.hintvalueLabel.Size = new System.Drawing.Size(58, 13);
+            this.hintvalueLabel.TabIndex = 11;
+            this.hintvalueLabel.Text = "Hint value:";
+            // 
+            // hintCheckBox
+            // 
+            this.hintCheckBox.AutoSize = true;
+            this.hintCheckBox.Location = new System.Drawing.Point(47, 68);
+            this.hintCheckBox.Name = "hintCheckBox";
+            this.hintCheckBox.Size = new System.Drawing.Size(15, 14);
+            this.hintCheckBox.TabIndex = 10;
+            this.hintCheckBox.UseVisualStyleBackColor = true;
+            this.hintCheckBox.CheckedChanged += new System.EventHandler(this.hintCheckBox_CheckedChanged);
             // 
             // teamLabel
             // 
@@ -82,16 +104,16 @@
             0,
             0,
             65536});
-            this.hintNumericUpDown.Location = new System.Drawing.Point(319, 29);
+            this.hintNumericUpDown.Location = new System.Drawing.Point(132, 66);
             this.hintNumericUpDown.Name = "hintNumericUpDown";
-            this.hintNumericUpDown.Size = new System.Drawing.Size(46, 20);
+            this.hintNumericUpDown.Size = new System.Drawing.Size(68, 20);
             this.hintNumericUpDown.TabIndex = 7;
-            this.hintNumericUpDown.Click += new System.EventHandler(this.hintNumericUpDown_Click);
+            this.hintNumericUpDown.ValueChanged += new System.EventHandler(this.hintNumericUpDown_ValueChanged);
             // 
             // hintLabel
             // 
             this.hintLabel.AutoSize = true;
-            this.hintLabel.Location = new System.Drawing.Point(286, 31);
+            this.hintLabel.Location = new System.Drawing.Point(6, 68);
             this.hintLabel.Name = "hintLabel";
             this.hintLabel.Size = new System.Drawing.Size(29, 13);
             this.hintLabel.TabIndex = 6;
@@ -100,7 +122,7 @@
             // sequenceLabel
             // 
             this.sequenceLabel.AutoSize = true;
-            this.sequenceLabel.Location = new System.Drawing.Point(158, 31);
+            this.sequenceLabel.Location = new System.Drawing.Point(154, 31);
             this.sequenceLabel.Name = "sequenceLabel";
             this.sequenceLabel.Size = new System.Drawing.Size(59, 13);
             this.sequenceLabel.TabIndex = 4;
@@ -113,9 +135,9 @@
             0,
             0,
             65536});
-            this.sequenceNumericUpDown.Location = new System.Drawing.Point(219, 29);
+            this.sequenceNumericUpDown.Location = new System.Drawing.Point(214, 29);
             this.sequenceNumericUpDown.Name = "sequenceNumericUpDown";
-            this.sequenceNumericUpDown.Size = new System.Drawing.Size(46, 20);
+            this.sequenceNumericUpDown.Size = new System.Drawing.Size(68, 20);
             this.sequenceNumericUpDown.TabIndex = 5;
             this.sequenceNumericUpDown.ValueChanged += new System.EventHandler(this.sequenceNumericUpDown_ValueChanged);
             // 
@@ -126,7 +148,7 @@
             this.AutoSize = true;
             this.Controls.Add(this.groupBox);
             this.Name = "mTargetPanel";
-            this.Size = new System.Drawing.Size(400, 64);
+            this.Size = new System.Drawing.Size(403, 98);
             this.groupBox.ResumeLayout(false);
             this.groupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.hintNumericUpDown)).EndInit();
@@ -144,5 +166,7 @@
         private System.Windows.Forms.NumericUpDown sequenceNumericUpDown;
         private System.Windows.Forms.Label teamLabel;
         private System.Windows.Forms.ComboBox teamComboBox;
+        private System.Windows.Forms.CheckBox hintCheckBox;
+        private System.Windows.Forms.Label hintvalueLabel;
     }
 }

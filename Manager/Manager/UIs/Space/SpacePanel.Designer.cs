@@ -31,16 +31,17 @@
             this.components = new System.ComponentModel.Container();
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.updateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sunToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.planetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.moonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.meteoroidToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buoyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.targetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.updateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.timer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
@@ -65,14 +66,7 @@
             this.copyToolStripMenuItem,
             this.deleteToolStripMenuItem});
             this.contextMenuStrip.Name = "contextMenuStrip";
-            this.contextMenuStrip.Size = new System.Drawing.Size(181, 114);
-            // 
-            // updateToolStripMenuItem
-            // 
-            this.updateToolStripMenuItem.Name = "updateToolStripMenuItem";
-            this.updateToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.updateToolStripMenuItem.Text = "Update";
-            this.updateToolStripMenuItem.Click += new System.EventHandler(this.updateToolStripMenuItem_Click);
+            this.contextMenuStrip.Size = new System.Drawing.Size(113, 92);
             // 
             // createToolStripMenuItem
             // 
@@ -84,64 +78,76 @@
             this.buoyToolStripMenuItem,
             this.targetToolStripMenuItem});
             this.createToolStripMenuItem.Name = "createToolStripMenuItem";
-            this.createToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.createToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.createToolStripMenuItem.Text = "Create";
-            // 
-            // copyToolStripMenuItem
-            // 
-            this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.copyToolStripMenuItem.Text = "Copy";
-            this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
-            // 
-            // deleteToolStripMenuItem
-            // 
-            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.deleteToolStripMenuItem.Text = "Delete";
-            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
             // sunToolStripMenuItem
             // 
             this.sunToolStripMenuItem.Name = "sunToolStripMenuItem";
-            this.sunToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sunToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.sunToolStripMenuItem.Text = "Sun";
             this.sunToolStripMenuItem.Click += new System.EventHandler(this.sunToolStripMenuItem_Click);
             // 
             // planetToolStripMenuItem
             // 
             this.planetToolStripMenuItem.Name = "planetToolStripMenuItem";
-            this.planetToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.planetToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.planetToolStripMenuItem.Text = "Planet";
             this.planetToolStripMenuItem.Click += new System.EventHandler(this.planetToolStripMenuItem_Click);
             // 
             // moonToolStripMenuItem
             // 
             this.moonToolStripMenuItem.Name = "moonToolStripMenuItem";
-            this.moonToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.moonToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.moonToolStripMenuItem.Text = "Moon";
             this.moonToolStripMenuItem.Click += new System.EventHandler(this.moonToolStripMenuItem_Click);
             // 
             // meteoroidToolStripMenuItem
             // 
             this.meteoroidToolStripMenuItem.Name = "meteoroidToolStripMenuItem";
-            this.meteoroidToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.meteoroidToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.meteoroidToolStripMenuItem.Text = "Meteoroid";
             this.meteoroidToolStripMenuItem.Click += new System.EventHandler(this.meteoroidToolStripMenuItem_Click);
             // 
             // buoyToolStripMenuItem
             // 
             this.buoyToolStripMenuItem.Name = "buoyToolStripMenuItem";
-            this.buoyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.buoyToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.buoyToolStripMenuItem.Text = "Buoy";
             this.buoyToolStripMenuItem.Click += new System.EventHandler(this.buoyToolStripMenuItem_Click);
             // 
             // targetToolStripMenuItem
             // 
             this.targetToolStripMenuItem.Name = "targetToolStripMenuItem";
-            this.targetToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.targetToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.targetToolStripMenuItem.Text = "Target";
             this.targetToolStripMenuItem.Click += new System.EventHandler(this.targetToolStripMenuItem_Click);
+            // 
+            // updateToolStripMenuItem
+            // 
+            this.updateToolStripMenuItem.Name = "updateToolStripMenuItem";
+            this.updateToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.updateToolStripMenuItem.Text = "Update";
+            this.updateToolStripMenuItem.Click += new System.EventHandler(this.updateToolStripMenuItem_Click);
+            // 
+            // copyToolStripMenuItem
+            // 
+            this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.copyToolStripMenuItem.Text = "Copy";
+            this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
+            // 
+            // deleteToolStripMenuItem
+            // 
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.deleteToolStripMenuItem.Text = "Delete";
+            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
+            // 
+            // timer
+            // 
+            this.timer.Enabled = true;
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
             // SpacePanel
             // 
@@ -170,5 +176,6 @@
         private System.Windows.Forms.ToolStripMenuItem meteoroidToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem buoyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem targetToolStripMenuItem;
+        private System.Windows.Forms.Timer timer;
     }
 }

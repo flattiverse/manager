@@ -24,19 +24,22 @@ namespace Manager.UIs.Space.UnitPanels
 
             this.mMoon = mMoon;
 
+            gravityNumericUpDown.Minimum = decimal.MinValue;
+            gravityNumericUpDown.Maximum = decimal.MaxValue;
             gravityNumericUpDown.Value = (decimal)mMoon.Gravity;
+
+            radiationNumericUpDown.Minimum = decimal.MinValue;
+            radiationNumericUpDown.Maximum = decimal.MaxValue;
             radiationNumericUpDown.Value = (decimal)mMoon.Radiation;
         }
         #endregion
 
-        private void gravityNumericUpDown_ValueChanged(object sender, EventArgs e)
+        #region GUI Methods
+        private void mMoonPanel_MouseLeave(object sender, EventArgs e)
         {
             mMoon.Gravity = (float)gravityNumericUpDown.Value;
-        }
-
-        private void radiationNumericUpDown_ValueChanged(object sender, EventArgs e)
-        {
             mMoon.Radiation = (float)radiationNumericUpDown.Value;
         }
+        #endregion
     }
 }

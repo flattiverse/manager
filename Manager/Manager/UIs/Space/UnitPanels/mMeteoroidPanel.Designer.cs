@@ -44,7 +44,6 @@
             this.groupBox.Controls.Add(this.radiationLabel);
             this.groupBox.Controls.Add(this.gravityLabel);
             this.groupBox.Controls.Add(this.gravityNumericUpDown);
-            this.groupBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox.Location = new System.Drawing.Point(0, 0);
             this.groupBox.Name = "groupBox";
             this.groupBox.Size = new System.Drawing.Size(400, 64);
@@ -62,9 +61,8 @@
             65536});
             this.radiationNumericUpDown.Location = new System.Drawing.Point(197, 29);
             this.radiationNumericUpDown.Name = "radiationNumericUpDown";
-            this.radiationNumericUpDown.Size = new System.Drawing.Size(46, 20);
+            this.radiationNumericUpDown.Size = new System.Drawing.Size(68, 20);
             this.radiationNumericUpDown.TabIndex = 7;
-            this.radiationNumericUpDown.ValueChanged += new System.EventHandler(this.radiationNumericUpDown_ValueChanged);
             // 
             // radiationLabel
             // 
@@ -94,18 +92,18 @@
             65536});
             this.gravityNumericUpDown.Location = new System.Drawing.Point(71, 29);
             this.gravityNumericUpDown.Name = "gravityNumericUpDown";
-            this.gravityNumericUpDown.Size = new System.Drawing.Size(46, 20);
+            this.gravityNumericUpDown.Size = new System.Drawing.Size(68, 20);
             this.gravityNumericUpDown.TabIndex = 5;
-            this.gravityNumericUpDown.ValueChanged += new System.EventHandler(this.gravityNumericUpDown_ValueChanged);
             // 
-            // mPlanetPanel
+            // mMeteoroidPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.Controls.Add(this.groupBox);
-            this.Name = "mPlanetPanel";
-            this.Size = new System.Drawing.Size(400, 64);
+            this.Name = "mMeteoroidPanel";
+            this.Size = new System.Drawing.Size(403, 67);
+            this.MouseLeave += new System.EventHandler(this.mMeteoroidPanel_MouseLeave);
             this.groupBox.ResumeLayout(false);
             this.groupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.radiationNumericUpDown)).EndInit();

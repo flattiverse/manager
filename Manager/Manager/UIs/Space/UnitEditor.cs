@@ -4,6 +4,7 @@ using System;
 using System.Windows.Forms;
 using System.Xml;
 using Manager.UIs.Space.UnitPanels;
+using Flattiverse.Units;
 
 namespace Manager.UIs.Space
 {
@@ -41,8 +42,7 @@ namespace Manager.UIs.Space
             positionXNumericUpDown.Value = (decimal)mUnit.X;
             positionYNumericUpDown.Value = (decimal)mUnit.Y;
             radiusNumericUpDown.Value = (decimal)mUnit.R;
-
-            //TODO big switch
+            
             if (mUnit is mSun)
                 extraFieldsFlowLayoutPanel.Controls.Add(new mSunPanel((mSun)mUnit));
             else if (mUnit is mPlanet)
@@ -53,6 +53,8 @@ namespace Manager.UIs.Space
                 extraFieldsFlowLayoutPanel.Controls.Add(new mMoonPanel((mMoon)mUnit));
             else if (mUnit is mTarget)
                 extraFieldsFlowLayoutPanel.Controls.Add(new mTargetPanel((mTarget)mUnit));
+            else if (mUnit is mBuoy)
+                extraFieldsFlowLayoutPanel.Controls.Add(new mBuoyPanel((mBuoy)mUnit));
         }
 
         private void nameTextBox_TextChanged(object sender, EventArgs e)
@@ -93,5 +95,23 @@ namespace Manager.UIs.Space
             DialogResult = DialogResult.OK;
         }
         #endregion
+
+        private void saveButton_Click(object sender, EventArgs e)
+        {
+            if (!Unit.CheckName(nameTextBox.Text))
+            {
+                MessageBox.Show(@"Name is incorrect. Follow the rule: 1-64 chars, all latin chars, including umlauts and the chars: space . - _ \ / | and #.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            XmlDocument xmlDoc = new XmlDocument();
+
+            XmlElement el = mUnit.CreateXmlElement(xmlDoc);
+            xmlDoc.AppendChild(el);
+
+            XML = xmlDoc.OuterXml;
+
+            DialogResult = DialogResult.OK;
+        }
     }
 }

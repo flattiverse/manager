@@ -18,18 +18,47 @@ namespace Manager.UIs.Space.UnitPanels
 
             this.mTarget = mTarget;
 
-            foreach (Team t in Enum.GetValues(typeof(Team)))
-                teamComboBox.Items.Add(t);
+            foreach (Team t in mTarget.Galaxy.Universe.Teams)
+            {
+                ComboBoxItem item = new ComboBoxItem(t.Name, t);
+                teamComboBox.Items.Add(item);
 
+                if (t.Name == mTarget.Team.Name)
+                    teamComboBox.SelectedItem = item;
+            }
+
+            if (teamComboBox.SelectedItem == null)
+                teamComboBox.SelectedIndex = 0;
+
+            sequenceNumericUpDown.Minimum = decimal.MinValue;
+            sequenceNumericUpDown.Maximum = decimal.MaxValue;
             sequenceNumericUpDown.Value = mTarget.Sequence;
-            hintNumericUpDown.Value = (decimal)mTarget.Hint;
+
+            hintNumericUpDown.Minimum = decimal.MinValue;
+            hintNumericUpDown.Maximum = decimal.MaxValue;
+
+            if (mTarget.Hint.HasValue)
+            {
+                hintCheckBox.Checked = true;
+                hintNumericUpDown.Value = (decimal)mTarget.Hint;
+            }
+            else
+            {
+                hintCheckBox.Checked = false;
+                hintvalueLabel.Visible = false;
+                hintNumericUpDown.Visible = false;
+            }
         }
         #endregion
 
         #region GUI Methods
-        private void teamComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        //TODO saving without clicking
+        private void hintNumericUpDown_ValueChanged(object sender, EventArgs e)
         {
-            mTarget.Team = (Team)teamComboBox.SelectedItem;
+            if (hintCheckBox.Checked)
+                mTarget.Hint = (float)hintNumericUpDown.Value;
+            else
+                mTarget.Hint = null;
         }
 
         private void sequenceNumericUpDown_ValueChanged(object sender, EventArgs e)
@@ -37,9 +66,15 @@ namespace Manager.UIs.Space.UnitPanels
             mTarget.Sequence = (int)sequenceNumericUpDown.Value;
         }
 
-        private void hintNumericUpDown_Click(object sender, EventArgs e)
+        private void teamComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            mTarget.Hint = (float)hintNumericUpDown.Value; //TODO: null option
+            mTarget.Team = (Team)((ComboBoxItem)teamComboBox.SelectedItem).Value;
+        }
+
+        private void hintCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            hintvalueLabel.Visible = hintCheckBox.Checked;
+            hintNumericUpDown.Visible = hintCheckBox.Checked;
         }
         #endregion
     }

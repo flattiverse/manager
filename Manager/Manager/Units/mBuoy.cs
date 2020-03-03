@@ -1,16 +1,22 @@
 ﻿using System;
 using System.Xml;
 using Flattiverse;
+using Flattiverse.Units;
 
 namespace Manager.Units
 {
     public class mBuoy : mUnit
     {
+        #region Fields
+        public string Message;
+        #endregion
+
         #region Constructors
-        public mBuoy() { }
+        public mBuoy(Galaxy galaxy) : base(galaxy) { }
 
         public mBuoy(Buoy buoy) : base(buoy)
         {
+            Message = buoy.Message;
         }
         #endregion
 
@@ -21,8 +27,9 @@ namespace Manager.Units
 
             setBaseAttributes(el);
 
+            el.SetAttribute("Broadcast", Message); //TODO: something is wrong?
+
             return el;
-            //TODO: anything to add?
         }
         #endregion
     }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Xml;
 using Flattiverse;
+using Flattiverse.Units;
 
 namespace Manager.Units
 {
@@ -12,7 +13,7 @@ namespace Manager.Units
         #endregion
 
         #region Constructors
-        public mMoon() { }
+        public mMoon(Galaxy galaxy) : base(galaxy) { }
 
         public mMoon(Moon moon) : base(moon)
         {

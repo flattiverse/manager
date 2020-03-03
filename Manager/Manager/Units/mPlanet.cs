@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Xml;
 using Flattiverse;
+using Flattiverse.Units;
 
 namespace Manager.Units
 {
@@ -12,7 +13,7 @@ namespace Manager.Units
         #endregion
 
         #region Constructors
-        public mPlanet() { }
+        public mPlanet(Galaxy galaxy) : base(galaxy){ }
 
         public mPlanet(Planet planet) : base(planet)
         {
