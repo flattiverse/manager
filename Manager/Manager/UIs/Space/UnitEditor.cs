@@ -14,11 +14,10 @@ namespace Manager.UIs.Space
         public string XML;
 
         private mUnit mUnit;
-        private mUnit unitToCopy;
         #endregion
 
         #region Constructors
-        public UnitEditor(mUnit mUnit, mUnit unitToCopy = null)
+        public UnitEditor(mUnit mUnit)
         {
             InitializeComponent();
 
@@ -34,15 +33,11 @@ namespace Manager.UIs.Space
         #region GUI Methods
         private void UnitEditor_Load(object sender, EventArgs e)
         {
-            if (unitToCopy != null)
-                nameTextBox.Text = mUnit.Name + "_Copy";
-            else
-                nameTextBox.Text = mUnit.Name;
-
+            nameTextBox.Text = mUnit.Name;
             positionXNumericUpDown.Value = (decimal)mUnit.X;
             positionYNumericUpDown.Value = (decimal)mUnit.Y;
             radiusNumericUpDown.Value = (decimal)mUnit.R;
-            
+
             if (mUnit is mSun)
                 extraFieldsFlowLayoutPanel.Controls.Add(new mSunPanel((mSun)mUnit));
             else if (mUnit is mPlanet)
@@ -54,7 +49,13 @@ namespace Manager.UIs.Space
             else if (mUnit is mTarget)
                 extraFieldsFlowLayoutPanel.Controls.Add(new mTargetPanel((mTarget)mUnit));
             else if (mUnit is mBuoy)
+            {
                 extraFieldsFlowLayoutPanel.Controls.Add(new mBuoyPanel((mBuoy)mUnit));
+
+                radiusNumericUpDown.Maximum = 1;
+                radiusNumericUpDown.Minimum = 1;
+                radiusNumericUpDown.DecimalPlaces = 0;
+            }
         }
 
         private void nameTextBox_TextChanged(object sender, EventArgs e)
@@ -95,23 +96,5 @@ namespace Manager.UIs.Space
             DialogResult = DialogResult.OK;
         }
         #endregion
-
-        private void saveButton_Click(object sender, EventArgs e)
-        {
-            if (!Unit.CheckName(nameTextBox.Text))
-            {
-                MessageBox.Show(@"Name is incorrect. Follow the rule: 1-64 chars, all latin chars, including umlauts and the chars: space . - _ \ / | and #.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            XmlDocument xmlDoc = new XmlDocument();
-
-            XmlElement el = mUnit.CreateXmlElement(xmlDoc);
-            xmlDoc.AppendChild(el);
-
-            XML = xmlDoc.OuterXml;
-
-            DialogResult = DialogResult.OK;
-        }
     }
 }

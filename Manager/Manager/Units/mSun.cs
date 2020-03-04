@@ -1,5 +1,6 @@
 ﻿using Flattiverse;
 using Flattiverse.Units;
+using System;
 using System.Xml;
 
 namespace Manager.Units
@@ -19,8 +20,13 @@ namespace Manager.Units
             mCorona = new mCorona();
         }
 
-        public mSun(Sun sun) : base(sun)
+        public mSun(Unit unit) : base(unit)
         {
+            if (!(unit is Sun))
+                throw new Exception("mSun can be created only based on Sun");
+
+            Sun sun = (Sun)unit;
+
             Gravity = sun.Gravity;
             Radiation = sun.Radiation;
             PowerOutput = sun.PowerOutput;
@@ -37,6 +43,7 @@ namespace Manager.Units
 
             setBaseAttributes(el);
 
+            el.SetAttribute("Radius", R.ToString());
             el.SetAttribute("Gravity", Gravity.ToString());
             el.SetAttribute("Radiation", Radiation.ToString());
             el.SetAttribute("PowerOutput", PowerOutput.ToString());
@@ -45,6 +52,13 @@ namespace Manager.Units
                 mCorona.AddXmlAttributes(xmlDoc, el);
 
             return el;
+        }
+
+        public override mUnit Copy()
+        {
+            mSun copy = new mSun(Unit);
+            copy.Name = Unit.Name + "_Copy";
+            return copy;
         }
         #endregion
     }

@@ -56,6 +56,7 @@
             this.pictureBox.TabStop = false;
             this.pictureBox.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_Paint);
             this.pictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox_MouseDown);
+            this.pictureBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox_MouseMove);
             this.pictureBox.Resize += new System.EventHandler(this.pictureBox_Resize);
             // 
             // contextMenuStrip
@@ -156,7 +157,7 @@
             this.Controls.Add(this.pictureBox);
             this.Name = "SpacePanel";
             this.Size = new System.Drawing.Size(964, 734);
-            this.Load += new System.EventHandler(this.DrawSpace_Load);
+            this.Load += new System.EventHandler(this.SpacePanel_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.contextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);

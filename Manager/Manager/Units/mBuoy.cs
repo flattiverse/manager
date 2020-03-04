@@ -14,9 +14,12 @@ namespace Manager.Units
         #region Constructors
         public mBuoy(Galaxy galaxy) : base(galaxy) { }
 
-        public mBuoy(Buoy buoy) : base(buoy)
+        public mBuoy(Unit buoy) : base(buoy)
         {
-            Message = buoy.Message;
+            if (!(buoy is Buoy))
+                throw new Exception("mBouy can be created only based on Buoy");
+
+            Message = ((Buoy)buoy).Message;
         }
         #endregion
 
@@ -27,9 +30,16 @@ namespace Manager.Units
 
             setBaseAttributes(el);
 
-            el.SetAttribute("Broadcast", Message); //TODO: something is wrong?
+            el.InnerText = Message;
 
             return el;
+        }
+
+        public override mUnit Copy()
+        {
+            mBuoy copy = new mBuoy(Unit);
+            copy.Name = Unit.Name + "_Copy";
+            return copy;
         }
         #endregion
     }

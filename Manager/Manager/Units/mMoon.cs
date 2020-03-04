@@ -10,15 +10,22 @@ namespace Manager.Units
         #region Fields
         public float Gravity;
         public float Radiation;
+        public FlattiverseResource Resource;
         #endregion
 
         #region Constructors
         public mMoon(Galaxy galaxy) : base(galaxy) { }
 
-        public mMoon(Moon moon) : base(moon)
+        public mMoon(Unit unit) : base(unit)
         {
+            if (!(unit is Moon))
+                throw new Exception("mMoon can be created only based on Moon");
+
+            Moon moon = (Moon)unit;
+
             Gravity = moon.Gravity;
             Radiation = moon.Radiation;
+            Resource = moon.Resource;
         }
         #endregion
 
@@ -29,9 +36,18 @@ namespace Manager.Units
 
             setBaseAttributes(el);
 
+            el.SetAttribute("Radius", R.ToString());
             el.SetAttribute("Gravity", Gravity.ToString());
+            el.SetAttribute("Resource", Resource.ToString());
             el.SetAttribute("Radiation", Radiation.ToString());
             return el;
+        }
+
+        public override mUnit Copy()
+        {
+            mMoon copy = new mMoon(Unit);
+            copy.Name = Unit.Name + "_Copy";
+            return copy;
         }
         #endregion
     }

@@ -3,6 +3,7 @@ using Manager.UIs.Accounts;
 using Manager.UIs.Settings;
 using Manager.UIs.Space;
 using System;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Manager.UIs
@@ -46,14 +47,32 @@ namespace Manager.UIs
             drawSpacePanel((Galaxy)item.Tag);
         }
 
-        private void drawSpacePanel(Galaxy galaxy)
+        private async void drawSpacePanel(Galaxy galaxy)
         {
-            mainPanel.Controls.Clear();
+            await partUniverse();
 
             SpacePanel ds = new SpacePanel(galaxy);
             ds.Dock = DockStyle.Fill;
             ds.Tag = galaxy;
             mainPanel.Controls.Add(ds);
+        }
+
+        private async Task partUniverse()
+        {
+            foreach (Control c in mainPanel.Controls)
+                try
+                {
+                    Galaxy galaxy = (Galaxy)(c.Tag);
+
+                    await galaxy.StopView();
+                    await galaxy.Universe.Part();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error while parting from " + ((Galaxy)(c.Tag)).Name, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            mainPanel.Controls.Clear();
         }
         #endregion
 
@@ -136,17 +155,18 @@ namespace Manager.UIs
 
         private async void mainPanel_ControlRemoved(object sender, ControlEventArgs e)
         {
-            if (e.Control.Tag is Galaxy)
-                try
-                {
-                    Galaxy galaxy = (Galaxy)(e.Control.Tag);
+            //if (e.Control.Tag is Galaxy)
+            //    try
+            //    {
+            //        Galaxy galaxy = (Galaxy)(e.Control.Tag);
 
-                    await galaxy.Universe.Part();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Error while parting from " + ((Galaxy)(e.Control.Tag)).Name, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+            //        await galaxy.StopView();
+            //        await galaxy.Universe.Part();
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        MessageBox.Show(ex.Message, "Error while parting from " + ((Galaxy)(e.Control.Tag)).Name, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    }
         }
         #endregion
     }

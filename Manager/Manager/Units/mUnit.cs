@@ -17,6 +17,7 @@ namespace Manager.Units
         public float X;
         public float Y;
         public float R;
+        public Unit Unit;
         #endregion
 
         #region Constructors
@@ -27,6 +28,7 @@ namespace Manager.Units
 
         public mUnit(Unit unit)
         {
+            Unit = unit;
             Galaxy = unit.Galaxy;
 
             Name = unit.Name;
@@ -38,8 +40,16 @@ namespace Manager.Units
 
         #region Methods
         public virtual XmlElement CreateXmlElement(XmlDocument xmlDoc)
-        { 
+        {
             return xmlDoc.CreateElement("Unit");
+        }
+
+        public virtual mUnit Copy()
+        {
+            mUnit copy = new mUnit(Unit);
+            copy.Name = Unit.Name + "_Copy";
+
+            return copy;
         }
 
         protected void setBaseAttributes(XmlElement el)
@@ -47,7 +57,6 @@ namespace Manager.Units
             el.SetAttribute("Name", Name);
             el.SetAttribute("PositionX", X.ToString());
             el.SetAttribute("PositionY", Y.ToString());
-            el.SetAttribute("Radius", R.ToString());
         }
         #endregion
     }

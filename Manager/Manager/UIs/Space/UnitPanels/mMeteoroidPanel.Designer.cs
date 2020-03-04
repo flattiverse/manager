@@ -33,6 +33,8 @@
             this.radiationLabel = new System.Windows.Forms.Label();
             this.gravityLabel = new System.Windows.Forms.Label();
             this.gravityNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.resourceComboBox = new System.Windows.Forms.ComboBox();
+            this.resourceLabel = new System.Windows.Forms.Label();
             this.groupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.radiationNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gravityNumericUpDown)).BeginInit();
@@ -40,6 +42,8 @@
             // 
             // groupBox
             // 
+            this.groupBox.Controls.Add(this.resourceLabel);
+            this.groupBox.Controls.Add(this.resourceComboBox);
             this.groupBox.Controls.Add(this.radiationNumericUpDown);
             this.groupBox.Controls.Add(this.radiationLabel);
             this.groupBox.Controls.Add(this.gravityLabel);
@@ -59,7 +63,7 @@
             0,
             0,
             65536});
-            this.radiationNumericUpDown.Location = new System.Drawing.Point(197, 29);
+            this.radiationNumericUpDown.Location = new System.Drawing.Point(179, 29);
             this.radiationNumericUpDown.Name = "radiationNumericUpDown";
             this.radiationNumericUpDown.Size = new System.Drawing.Size(68, 20);
             this.radiationNumericUpDown.TabIndex = 7;
@@ -67,7 +71,7 @@
             // radiationLabel
             // 
             this.radiationLabel.AutoSize = true;
-            this.radiationLabel.Location = new System.Drawing.Point(141, 31);
+            this.radiationLabel.Location = new System.Drawing.Point(122, 31);
             this.radiationLabel.Name = "radiationLabel";
             this.radiationLabel.Size = new System.Drawing.Size(55, 13);
             this.radiationLabel.TabIndex = 6;
@@ -76,7 +80,7 @@
             // gravityLabel
             // 
             this.gravityLabel.AutoSize = true;
-            this.gravityLabel.Location = new System.Drawing.Point(24, 31);
+            this.gravityLabel.Location = new System.Drawing.Point(3, 31);
             this.gravityLabel.Name = "gravityLabel";
             this.gravityLabel.Size = new System.Drawing.Size(43, 13);
             this.gravityLabel.TabIndex = 4;
@@ -90,10 +94,28 @@
             0,
             0,
             65536});
-            this.gravityNumericUpDown.Location = new System.Drawing.Point(71, 29);
+            this.gravityNumericUpDown.Location = new System.Drawing.Point(47, 29);
             this.gravityNumericUpDown.Name = "gravityNumericUpDown";
             this.gravityNumericUpDown.Size = new System.Drawing.Size(68, 20);
             this.gravityNumericUpDown.TabIndex = 5;
+            // 
+            // resourceComboBox
+            // 
+            this.resourceComboBox.FormattingEnabled = true;
+            this.resourceComboBox.Location = new System.Drawing.Point(310, 28);
+            this.resourceComboBox.Name = "resourceComboBox";
+            this.resourceComboBox.Size = new System.Drawing.Size(87, 21);
+            this.resourceComboBox.TabIndex = 8;
+            this.resourceComboBox.SelectedIndexChanged += new System.EventHandler(this.resourceComboBox_SelectedIndexChanged);
+            // 
+            // resourceLabel
+            // 
+            this.resourceLabel.AutoSize = true;
+            this.resourceLabel.Location = new System.Drawing.Point(252, 32);
+            this.resourceLabel.Name = "resourceLabel";
+            this.resourceLabel.Size = new System.Drawing.Size(56, 13);
+            this.resourceLabel.TabIndex = 9;
+            this.resourceLabel.Text = "Resource:";
             // 
             // mMeteoroidPanel
             // 
@@ -119,5 +141,7 @@
         private System.Windows.Forms.Label radiationLabel;
         private System.Windows.Forms.Label gravityLabel;
         private System.Windows.Forms.NumericUpDown gravityNumericUpDown;
+        private System.Windows.Forms.Label resourceLabel;
+        private System.Windows.Forms.ComboBox resourceComboBox;
     }
 }

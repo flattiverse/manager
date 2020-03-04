@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Manager.Units;
+using Flattiverse;
 
 namespace Manager.UIs.Space.UnitPanels
 {
@@ -24,6 +25,14 @@ namespace Manager.UIs.Space.UnitPanels
 
             this.mPlanet = mPlanet;
 
+            foreach (FlattiverseResource p in Enum.GetValues(typeof(FlattiverseResource)))
+            {
+                resourceComboBox.Items.Add(p);
+
+                if (mPlanet.Resource == p)
+                    resourceComboBox.SelectedItem = p;
+            }
+
             gravityNumericUpDown.Minimum = decimal.MinValue;
             gravityNumericUpDown.Maximum = decimal.MaxValue;
             gravityNumericUpDown.Value = (decimal)mPlanet.Gravity;
@@ -39,6 +48,11 @@ namespace Manager.UIs.Space.UnitPanels
         {
             mPlanet.Gravity = (float)gravityNumericUpDown.Value;
             mPlanet.Radiation = (float)radiationNumericUpDown.Value;
+        }
+
+        private void resourceComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            mPlanet.Resource = (FlattiverseResource)resourceComboBox.SelectedItem;
         }
         #endregion
     }

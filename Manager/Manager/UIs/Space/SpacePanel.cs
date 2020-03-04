@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Region = Flattiverse.Region;
@@ -18,18 +19,20 @@ namespace Manager.UIs.Space
         private Server server;
         private Universe universe;
         private Galaxy galaxy;
-        private List<mUnit> mUnits; //TODO
+        private List<mUnit> mUnits;
         private mUnit selectedUnit;
-        private object syncDrawing = new object();
         private List<Region> regions;
 
         private float cx; //Center of the picturebox 
         private float cy; //Center of the picturebox
+        private float scrollX = 0.0f; //Center of the picturebox 
+        private float scrollY = 0.0f; //Center of the picturebox
         private float zoom = 0.5f;
 
         private Bitmap bitmap;
         private Font font = new Font("Arial", 8);
         private Controllable testShip;
+        private Point lastMousePosition;
         Pen dashedYellowPen = new Pen(Brushes.Yellow);
         #endregion
 
@@ -93,13 +96,12 @@ namespace Manager.UIs.Space
 
         private void draw()
         {
-            cx = pictureBox.Width / 2f;
-            cy = pictureBox.Height / 2f;
+            cx = scrollX + pictureBox.Width / 2f;
+            cy = scrollY + pictureBox.Height / 2f;
 
             using (Graphics graphics = Graphics.FromImage(bitmap))
             {
                 graphics.Clear(Color.Black);
-
 
                 foreach (mUnit u in mUnits)
                 {
@@ -178,23 +180,26 @@ namespace Manager.UIs.Space
         #endregion
 
         #region GUI Methods
-        private async void DrawSpace_Load(object sender, EventArgs e)
+        private async void SpacePanel_Load(object sender, EventArgs e)
         {
             try
             {
                 Task<List<Region>> queryRegions = galaxy.QueryRegions();
-                bitmap = new Bitmap(pictureBox.Width, pictureBox.Height);
 
                 setPens();
+
+                MouseWheel += new MouseEventHandler(MouseWheelHandler);
 
                 await universe.Join();
 
                 regions = await queryRegions;
+
                 await galaxy.StartView();
 
+                bitmap = new Bitmap(pictureBox.Width, pictureBox.Height);
+                lastMousePosition = MousePosition;
                 //testShip = await universe.NewShip("Test123");
 
-                MouseWheel += new MouseEventHandler(MouseWheelHandler);
             }
             catch (Exception ex)
             {
@@ -258,11 +263,31 @@ namespace Manager.UIs.Space
             }
         }
 
+        private void pictureBox_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Middle)
+            {
+                if (lastMousePosition.X - e.X > 0)
+                    scrollX = scrollX - 3;
+                else if (lastMousePosition.X - e.X < 0)
+                    scrollX = scrollX + 3;
+                else if (lastMousePosition.Y - e.Y > 0)
+                    scrollY = scrollY - 3;
+                else if (lastMousePosition.Y - e.Y < 0)
+                    scrollY = scrollY + 3;
+            }
+
+            lastMousePosition = e.Location;
+        }
+
         private async void updateToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (UnitEditor ue = new UnitEditor(selectedUnit))
                 if (ue.ShowDialog() == DialogResult.OK)
-                    await galaxy.UpdateUnitXml(ue.XML);
+                {
+                    string xml = await server.CheckUnitXml(ue.XML);
+                    await galaxy.UpdateUnitXml(xml);
+                }
 
             selectedUnit = null;
         }
@@ -272,7 +297,6 @@ namespace Manager.UIs.Space
             try
             {
                 await galaxy.DeleteUnit(selectedUnit.Name);
-                mUnits.Remove(selectedUnit);
             }
             catch (Exception ex)
             {
@@ -280,14 +304,18 @@ namespace Manager.UIs.Space
             }
         }
 
-        private void copyToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void copyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //TODO:
-            //using (UnitEditor ue = new UnitEditor(selectedUnit))
-            //    if (ue.ShowDialog() == DialogResult.OK)
-            //        await galaxy.UpdateUnitXml(ue.XML);
+            mUnit copy = selectedUnit.Copy();
 
-            //selectedUnit = null;
+            using (UnitEditor ue = new UnitEditor(copy))
+                if (ue.ShowDialog() == DialogResult.OK)
+                {
+                    string xml = await server.CheckUnitXml(ue.XML);
+                    await galaxy.UpdateUnitXml(xml);
+                }
+
+            selectedUnit = null;
         }
 
         private async void sunToolStripMenuItem_Click(object sender, EventArgs e)
@@ -296,7 +324,10 @@ namespace Manager.UIs.Space
 
             using (UnitEditor ue = new UnitEditor(mSun))
                 if (ue.ShowDialog() == DialogResult.OK)
-                    await galaxy.UpdateUnitXml(ue.XML);
+                {
+                    string xml = await server.CheckUnitXml(ue.XML);
+                    await galaxy.UpdateUnitXml(xml);
+                }
 
             selectedUnit = null;
         }
@@ -307,7 +338,10 @@ namespace Manager.UIs.Space
 
             using (UnitEditor ue = new UnitEditor(mPlanet))
                 if (ue.ShowDialog() == DialogResult.OK)
-                    await galaxy.UpdateUnitXml(ue.XML);
+                {
+                    string xml = await server.CheckUnitXml(ue.XML);
+                    await galaxy.UpdateUnitXml(xml);
+                }
 
             selectedUnit = null;
         }
@@ -318,7 +352,10 @@ namespace Manager.UIs.Space
 
             using (UnitEditor ue = new UnitEditor(mMoon))
                 if (ue.ShowDialog() == DialogResult.OK)
-                    await galaxy.UpdateUnitXml(ue.XML);
+                {
+                    string xml = await server.CheckUnitXml(ue.XML);
+                    await galaxy.UpdateUnitXml(xml);
+                }
 
             selectedUnit = null;
         }
@@ -329,7 +366,10 @@ namespace Manager.UIs.Space
 
             using (UnitEditor ue = new UnitEditor(mMeteoroid))
                 if (ue.ShowDialog() == DialogResult.OK)
-                    await galaxy.UpdateUnitXml(ue.XML);
+                {
+                    string xml = await server.CheckUnitXml(ue.XML);
+                    await galaxy.UpdateUnitXml(xml);
+                }
 
             selectedUnit = null;
         }
@@ -340,7 +380,10 @@ namespace Manager.UIs.Space
 
             using (UnitEditor ue = new UnitEditor(mBuoy))
                 if (ue.ShowDialog() == DialogResult.OK)
+                {
+                    //string xml = await server.CheckUnitXml(ue.XML);
                     await galaxy.UpdateUnitXml(ue.XML);
+                }
 
             selectedUnit = null;
         }
@@ -351,7 +394,10 @@ namespace Manager.UIs.Space
 
             using (UnitEditor ue = new UnitEditor(mTarget))
                 if (ue.ShowDialog() == DialogResult.OK)
-                    await galaxy.UpdateUnitXml(ue.XML);
+                {
+                    string xml = await server.CheckUnitXml(ue.XML);
+                    await galaxy.UpdateUnitXml(xml);
+                }
 
             selectedUnit = null;
         }

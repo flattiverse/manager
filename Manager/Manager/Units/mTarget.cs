@@ -19,8 +19,13 @@ namespace Manager.Units
             Team = galaxy.Universe.Teams.List[0];
         }
 
-        public mTarget(Target target) : base(target)
+        public mTarget(Unit unit) : base(unit)
         {
+            if (!(unit is Target))
+                throw new Exception("mTarget can be created only based on Target");
+
+            Target target = (Target)unit;
+
             Team = target.Team;
             Sequence = target.Sequence;
             Hint = target.Hint;
@@ -41,6 +46,13 @@ namespace Manager.Units
                 el.SetAttribute("Hint", Hint.ToString());
 
             return el;
+        }
+
+        public override mUnit Copy()
+        {
+            mTarget copy = new mTarget(Unit);
+            copy.Name = Unit.Name + "_Copy";
+            return copy;
         }
         #endregion
     }
