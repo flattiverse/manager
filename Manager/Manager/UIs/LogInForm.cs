@@ -15,8 +15,6 @@ namespace Manager.UIs
         public LogInForm()
         {
             InitializeComponent();
-            userNameTextBox.Text = "Player0";
-            passwordTextBox.Text = "Password";
         }
         #endregion
 
@@ -25,9 +23,6 @@ namespace Manager.UIs
         {
             try
             {
-                Stopwatch sw = new Stopwatch();
-                sw.Start();
-                
                 Enabled = false;
                 Text = "Log in. Connecting... Please wait";
 
@@ -36,7 +31,6 @@ namespace Manager.UIs
                 await Server.Login(userNameTextBox.Text, passwordTextBox.Text);
 
                 DialogResult = DialogResult.OK;
-                Console.WriteLine(sw.Elapsed);
             }
             catch (Exception ex)
             {

@@ -56,6 +56,12 @@
     <Compile Include="UIs\Accounts\ChangePasswordForm.Designer.cs">
       <DependentUpon>ChangePasswordForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIs\Space\RegionEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIs\Space\RegionEditor.Designer.cs">
+      <DependentUpon>RegionEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIs\Space\UnitPanels\mMeteoroidPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -130,7 +136,6 @@
     <Compile Include="UIs\Space\UnitEditor.Designer.cs">
       <DependentUpon>UnitEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Units\mCorona.cs" />
     <Compile Include="Units\mMeteoroid.cs" />
     <Compile Include="Units\mMoon.cs" />
     <Compile Include="Units\mPlanet.cs" />
@@ -141,6 +146,9 @@
     <Compile Include="Units\mUnit.cs" />
     <EmbeddedResource Include="UIs\Accounts\ChangePasswordForm.resx">
       <DependentUpon>ChangePasswordForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIs\Space\RegionEditor.resx">
+      <DependentUpon>RegionEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIs\Space\UnitPanels\mMeteoroidPanel.resx">
       <DependentUpon>mMeteoroidPanel.cs</DependentUpon>

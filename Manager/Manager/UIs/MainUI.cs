@@ -152,22 +152,6 @@ namespace Manager.UIs
             sa.Dock = DockStyle.Fill;
             mainPanel.Controls.Add(sa);
         }
-
-        private async void mainPanel_ControlRemoved(object sender, ControlEventArgs e)
-        {
-            //if (e.Control.Tag is Galaxy)
-            //    try
-            //    {
-            //        Galaxy galaxy = (Galaxy)(e.Control.Tag);
-
-            //        await galaxy.StopView();
-            //        await galaxy.Universe.Part();
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        MessageBox.Show(ex.Message, "Error while parting from " + ((Galaxy)(e.Control.Tag)).Name, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //    }
-        }
         #endregion
     }
 }

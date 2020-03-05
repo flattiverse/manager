@@ -22,16 +22,16 @@ namespace Manager.UIs.Space
         private List<mUnit> mUnits;
         private mUnit selectedUnit;
         private List<Region> regions;
+        private Region selectedRegion;
 
         private float cx; //Center of the picturebox 
         private float cy; //Center of the picturebox
         private float scrollX = 0.0f; //Center of the picturebox 
         private float scrollY = 0.0f; //Center of the picturebox
-        private float zoom = 0.5f;
+        private float zoom = 1.0f;
 
         private Bitmap bitmap;
         private Font font = new Font("Arial", 8);
-        private Controllable testShip;
         private Point lastMousePosition;
         Pen dashedYellowPen = new Pen(Brushes.Yellow);
         #endregion
@@ -85,10 +85,10 @@ namespace Manager.UIs.Space
                         case PlayerUnit player: mUnits.Add(new mPlayerUnit(player)); break;
                     }
                 }
-                else if (@event is UnitEvent)
-                    Console.WriteLine("Unit Event");
-                else if (@event is UpdatedUnitEvent)
-                    Console.WriteLine("UpdatedUnitEvent");
+                //else if (@event is UnitEvent)
+                //Console.WriteLine("Unit Event");
+                //else if (@event is UpdatedUnitEvent)
+                //Console.WriteLine("UpdatedUnitEvent");
             }
 
             draw();
@@ -147,12 +147,11 @@ namespace Manager.UIs.Space
                     }
                 }
 
-                //TODO: test it
                 foreach (Region region in regions)
                 {
-                    Pen pen = new Pen(Color.FromArgb((int)region.Team.R * 255, (int)region.Team.G * 255, (int)region.Team.B * 255));
+                    Pen pen = new Pen(Color.FromArgb(region.Team.R, region.Team.G, region.Team.B));
                     pen.DashPattern = new float[] { 2, 6 };
-                    graphics.DrawRectangle(pen, compX(region.Left), compY(region.Top), compD(region.Right - region.Left), compD(region.Top - region.Bottom));
+                    graphics.DrawRectangle(pen, compX(region.Left), compY(region.Top), compD((region.Right - region.Left) / 2), compD((region.Top - region.Bottom) / 2));
                 }
             }
 
@@ -179,23 +178,17 @@ namespace Manager.UIs.Space
         private async void SpacePanel_Load(object sender, EventArgs e)
         {
             try
-            {
-                Task<List<Region>> queryRegions = galaxy.QueryRegions();
-
+            {            
                 setPens();
 
                 MouseWheel += new MouseEventHandler(MouseWheelHandler);
 
+                regions = await galaxy.QueryRegions();
                 await universe.Join();
-
-                regions = await queryRegions;
-
                 await galaxy.StartView();
 
                 bitmap = new Bitmap(pictureBox.Width, pictureBox.Height);
                 lastMousePosition = MousePosition;
-                //testShip = await universe.NewShip("Test123");
-
             }
             catch (Exception ex)
             {
@@ -232,28 +225,40 @@ namespace Manager.UIs.Space
         private void pictureBox_MouseDown(object sender, MouseEventArgs e)
         {
             selectedUnit = null;
+            selectedRegion = null;
 
             if (e.Button == MouseButtons.Right)
             {
                 updateToolStripMenuItem.Visible = false;
                 deleteToolStripMenuItem.Visible = false;
                 copyToolStripMenuItem.Visible = false;
+                updateRegionToolStripMenuItem.Visible = false;
+                deleteRegionToolStripMenuItem.Visible = false;
 
                 Point p = new Point((int)((e.X - cx) / zoom), (int)(-(e.Y - cy) / zoom));
 
                 foreach (mUnit u in mUnits)
-                    if (Math.Pow(p.X - u.X, 2) + Math.Pow(p.Y - u.Y, 2) <= Math.Pow(u.R, 2))
+                    if (!(u is mPlayerUnit) && Math.Pow(p.X - u.X, 2) + Math.Pow(p.Y - u.Y, 2) <= Math.Pow(u.R, 2))
                     {
                         selectedUnit = u;
+
+                        updateToolStripMenuItem.Visible = true;
+                        deleteToolStripMenuItem.Visible = true;
+                        copyToolStripMenuItem.Visible = true;
+
                         break;
                     }
 
-                if (selectedUnit != null)
-                {
-                    updateToolStripMenuItem.Visible = true;
-                    deleteToolStripMenuItem.Visible = true;
-                    copyToolStripMenuItem.Visible = true;
-                }
+                foreach (Region r in regions)
+                    if (p.X >= r.Left && p.X <= r.Right && p.Y >= r.Bottom && p.Y <= r.Top)
+                    {
+                        selectedRegion = r;
+
+                        updateRegionToolStripMenuItem.Visible = true;
+                        deleteRegionToolStripMenuItem.Visible = true;
+
+                        break;
+                    }
 
                 contextMenuStrip.Show(MousePosition);
             }
@@ -284,8 +289,6 @@ namespace Manager.UIs.Space
                     string xml = await server.CheckUnitXml(ue.XML);
                     await galaxy.UpdateUnitXml(xml);
                 }
-
-            selectedUnit = null;
         }
 
         private async void deleteToolStripMenuItem_Click(object sender, EventArgs e)
@@ -310,8 +313,6 @@ namespace Manager.UIs.Space
                     string xml = await server.CheckUnitXml(ue.XML);
                     await galaxy.UpdateUnitXml(xml);
                 }
-
-            selectedUnit = null;
         }
 
         private async void sunToolStripMenuItem_Click(object sender, EventArgs e)
@@ -324,8 +325,6 @@ namespace Manager.UIs.Space
                     string xml = await server.CheckUnitXml(ue.XML);
                     await galaxy.UpdateUnitXml(xml);
                 }
-
-            selectedUnit = null;
         }
 
         private async void planetToolStripMenuItem_Click(object sender, EventArgs e)
@@ -338,8 +337,6 @@ namespace Manager.UIs.Space
                     string xml = await server.CheckUnitXml(ue.XML);
                     await galaxy.UpdateUnitXml(xml);
                 }
-
-            selectedUnit = null;
         }
 
         private async void moonToolStripMenuItem_Click(object sender, EventArgs e)
@@ -352,8 +349,6 @@ namespace Manager.UIs.Space
                     string xml = await server.CheckUnitXml(ue.XML);
                     await galaxy.UpdateUnitXml(xml);
                 }
-
-            selectedUnit = null;
         }
 
         private async void meteoroidToolStripMenuItem_Click(object sender, EventArgs e)
@@ -366,8 +361,6 @@ namespace Manager.UIs.Space
                     string xml = await server.CheckUnitXml(ue.XML);
                     await galaxy.UpdateUnitXml(xml);
                 }
-
-            selectedUnit = null;
         }
 
         private async void buoyToolStripMenuItem_Click(object sender, EventArgs e)
@@ -380,8 +373,6 @@ namespace Manager.UIs.Space
                     string xml = await server.CheckUnitXml(ue.XML);
                     await galaxy.UpdateUnitXml(xml);
                 }
-
-            selectedUnit = null;
         }
 
         private async void targetToolStripMenuItem_Click(object sender, EventArgs e)
@@ -394,8 +385,45 @@ namespace Manager.UIs.Space
                     string xml = await server.CheckUnitXml(ue.XML);
                     await galaxy.UpdateUnitXml(xml);
                 }
+        }
 
-            selectedUnit = null;
+        private async void createRegionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            byte id = 0x00;
+
+            foreach (Region r in regions)
+                if (r.ID > id)
+                    id = r.ID;
+
+            id++;
+
+            Region reg = new Region(id);
+
+            using (RegionEditor re = new RegionEditor(reg, galaxy))
+            {
+                if (re.ShowDialog() == DialogResult.OK)
+                {
+                    await galaxy.UpdateRegion(re.mRegion);
+
+                    regions.Add(reg);
+                }
+            }
+        }
+
+        private async void updateRegionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (RegionEditor re = new RegionEditor(selectedRegion, galaxy))
+            {
+                if (re.ShowDialog() == DialogResult.OK)
+                    await galaxy.UpdateRegion(re.mRegion);
+            }
+        }
+
+        private async void deleteRegionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            await galaxy.DeleteRegion(selectedRegion);
+
+            regions.Remove(selectedRegion);
         }
         #endregion
     }

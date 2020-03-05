@@ -108,7 +108,6 @@
             this.mainPanel.Name = "mainPanel";
             this.mainPanel.Size = new System.Drawing.Size(807, 579);
             this.mainPanel.TabIndex = 2;
-            this.mainPanel.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.mainPanel_ControlRemoved);
             // 
             // treeViewPanel
             // 
