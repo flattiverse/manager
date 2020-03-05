@@ -12,7 +12,6 @@ namespace Manager.Units
         public float Radiation;
         public float PowerOutput;
         public FlattiverseResourceKind ResourceKind;
-        public mCorona mCorona;
         #endregion
 
         #region Constructors

@@ -126,10 +126,6 @@ namespace Manager.UIs.Space
                         case mSun sun:
                             graphics.DrawEllipse(Pens.Yellow, compX(u.X - u.R), compY(u.Y + u.R), compD(u.R), compD(u.R));
                             //graphics.DrawString(u.Name, font, Brushes.White, compX(u.X), compY(u.Y));
-
-                            if (sun.mCorona != null && sun.mCorona.Plasma > 0)
-                                graphics.DrawEllipse(dashedYellowPen, compX(u.X - sun.mCorona.Radius), compY(u.Y + sun.mCorona.Radius), compD(sun.mCorona.Radius), compD(sun.mCorona.Radius));
-
                             break;
                         case mTarget target:
                             graphics.DrawEllipse(Pens.Violet, compX(u.X - u.R), compY(u.Y + u.R), compD(u.R), compD(u.R));
