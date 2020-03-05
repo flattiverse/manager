@@ -11,13 +11,13 @@ namespace Manager.Units
         public float Gravity;
         public float Radiation;
         public float PowerOutput;
+        public FlattiverseResourceKind ResourceKind;
         public mCorona mCorona;
         #endregion
 
         #region Constructors
         public mSun(Galaxy galaxy) : base(galaxy)
         {
-            mCorona = new mCorona();
         }
 
         public mSun(Unit unit) : base(unit)
@@ -30,9 +30,7 @@ namespace Manager.Units
             Gravity = sun.Gravity;
             Radiation = sun.Radiation;
             PowerOutput = sun.PowerOutput;
-
-            if (sun.Corona != null)
-                mCorona = new mCorona(sun.Corona);
+            ResourceKind = sun.Resource;
         }
         #endregion
 
@@ -47,9 +45,7 @@ namespace Manager.Units
             el.SetAttribute("Gravity", Gravity.ToString());
             el.SetAttribute("Radiation", Radiation.ToString());
             el.SetAttribute("PowerOutput", PowerOutput.ToString());
-
-            if (mCorona != null && mCorona.Plasma > 0)
-                mCorona.AddXmlAttributes(xmlDoc, el);
+            el.SetAttribute("Resource", ResourceKind.ToString());
 
             return el;
         }

@@ -381,8 +381,8 @@ namespace Manager.UIs.Space
             using (UnitEditor ue = new UnitEditor(mBuoy))
                 if (ue.ShowDialog() == DialogResult.OK)
                 {
-                    //string xml = await server.CheckUnitXml(ue.XML);
-                    await galaxy.UpdateUnitXml(ue.XML);
+                    string xml = await server.CheckUnitXml(ue.XML);
+                    await galaxy.UpdateUnitXml(xml);
                 }
 
             selectedUnit = null;

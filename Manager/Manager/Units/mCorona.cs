@@ -19,15 +19,15 @@ namespace Manager.Units
             Plasma = new Plasma();
         }
 
-        public mCorona(SunCorona corona)
-        {
-            if (corona == null)
-                throw new Exception("Corona cannot be null");
+        //public mCorona(SunCorona corona)
+        //{
+        //    if (corona == null)
+        //        throw new Exception("Corona cannot be null");
 
-            Radius = corona.Radius;
-            Amount = corona.Amount;
-            Plasma = corona.Plasma;
-        }
+        //    Radius = corona.Radius;
+        //    Amount = corona.Amount;
+        //    Plasma = corona.Plasma;
+        //}
         #endregion
 
         #region Methods

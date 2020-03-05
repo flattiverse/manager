@@ -38,24 +38,17 @@ namespace Manager.UIs.Space.UnitPanels
             powerOutputNumericUpDown.Maximum = decimal.MaxValue;
             powerOutputNumericUpDown.Value = (decimal)mSun.PowerOutput;
 
-            plasmaComboBox.Items.Insert(0, "None");
-
-            foreach (Plasma p in Enum.GetValues(typeof(Plasma)))
-                plasmaComboBox.Items.Add(p);
-
-            plasmaComboBox.SelectedIndex = 0;
-
-            if (mSun.mCorona != null && mSun.mCorona.Plasma > 0)
+            foreach (FlattiverseResourceKind kind in Enum.GetValues(typeof(FlattiverseResourceKind)))
             {
-                coronaRadiusNumericUpDown.Minimum = decimal.MinValue;
-                coronaRadiusNumericUpDown.Maximum = decimal.MaxValue;
-                coronaRadiusNumericUpDown.Value = (decimal)mSun.mCorona.Radius;
+                int k = (int)kind;
 
-                amountNumericUpDown.Minimum = decimal.MinValue;
-                amountNumericUpDown.Maximum = decimal.MaxValue;
-                amountNumericUpDown.Value = (decimal)mSun.mCorona.Amount;
+                if (k < 7 || k == 21)
+                {
+                    resourceComboBox.Items.Add(kind);
 
-                plasmaComboBox.SelectedItem = mSun.mCorona.Plasma;
+                    if (mSun.ResourceKind == kind)
+                        resourceComboBox.SelectedItem = kind;
+                }
             }
         }
         #endregion
@@ -66,20 +59,11 @@ namespace Manager.UIs.Space.UnitPanels
             mSun.Gravity = (float)gravityNumericUpDown.Value;
             mSun.Radiation = (float)radiationNumericUpDown.Value;
             mSun.PowerOutput = (float)powerOutputNumericUpDown.Value;
+        }
 
-            if (mSun.mCorona == null && (plasmaComboBox.SelectedIndex) > 0)
-                mSun.mCorona = new mCorona();
-
-            if (mSun.mCorona != null)
-            {
-                mSun.mCorona.Amount = (float)amountNumericUpDown.Value;
-                mSun.mCorona.Radius = (float)coronaRadiusNumericUpDown.Value;
-
-                if (plasmaComboBox.SelectedIndex > 0)
-                    mSun.mCorona.Plasma = (Plasma)plasmaComboBox.SelectedItem;
-                else
-                    mSun.mCorona.Plasma = 0;
-            }
+        private void resourceComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            mSun.ResourceKind = (FlattiverseResourceKind)resourceComboBox.SelectedItem;
         }
         #endregion
     }

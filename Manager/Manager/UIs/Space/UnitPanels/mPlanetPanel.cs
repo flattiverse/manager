@@ -25,12 +25,17 @@ namespace Manager.UIs.Space.UnitPanels
 
             this.mPlanet = mPlanet;
 
-            foreach (FlattiverseResource p in Enum.GetValues(typeof(FlattiverseResource)))
+            foreach (FlattiverseResourceKind kind in Enum.GetValues(typeof(FlattiverseResourceKind)))
             {
-                resourceComboBox.Items.Add(p);
+                int k = (int)kind;
 
-                if (mPlanet.Resource == p)
-                    resourceComboBox.SelectedItem = p;
+                if (k > 6 && k < 13 || k == 21)
+                {
+                    resourceComboBox.Items.Add(kind);
+
+                    if (mPlanet.ResourceKind == kind)
+                        resourceComboBox.SelectedItem = kind;
+                }
             }
 
             gravityNumericUpDown.Minimum = decimal.MinValue;
@@ -52,7 +57,7 @@ namespace Manager.UIs.Space.UnitPanels
 
         private void resourceComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            mPlanet.Resource = (FlattiverseResource)resourceComboBox.SelectedItem;
+            mPlanet.ResourceKind = (FlattiverseResourceKind)resourceComboBox.SelectedItem;
         }
         #endregion
     }

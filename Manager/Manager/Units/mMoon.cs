@@ -10,7 +10,7 @@ namespace Manager.Units
         #region Fields
         public float Gravity;
         public float Radiation;
-        public FlattiverseResource Resource;
+        public FlattiverseResourceKind ResourceKind;
         #endregion
 
         #region Constructors
@@ -25,7 +25,7 @@ namespace Manager.Units
 
             Gravity = moon.Gravity;
             Radiation = moon.Radiation;
-            Resource = moon.Resource;
+            ResourceKind = moon.Resource;
         }
         #endregion
 
@@ -38,7 +38,7 @@ namespace Manager.Units
 
             el.SetAttribute("Radius", R.ToString());
             el.SetAttribute("Gravity", Gravity.ToString());
-            el.SetAttribute("Resource", Resource.ToString());
+            el.SetAttribute("Resource", ResourceKind.ToString());
             el.SetAttribute("Radiation", Radiation.ToString());
             return el;
         }

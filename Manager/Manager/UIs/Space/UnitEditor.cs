@@ -47,7 +47,13 @@ namespace Manager.UIs.Space
             else if (mUnit is mMoon)
                 extraFieldsFlowLayoutPanel.Controls.Add(new mMoonPanel((mMoon)mUnit));
             else if (mUnit is mTarget)
+            {
                 extraFieldsFlowLayoutPanel.Controls.Add(new mTargetPanel((mTarget)mUnit));
+
+                radiusNumericUpDown.Maximum = 1;
+                radiusNumericUpDown.Minimum = 1;
+                radiusNumericUpDown.DecimalPlaces = 0;
+            }
             else if (mUnit is mBuoy)
             {
                 extraFieldsFlowLayoutPanel.Controls.Add(new mBuoyPanel((mBuoy)mUnit));
